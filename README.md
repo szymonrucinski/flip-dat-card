@@ -5,7 +5,7 @@ Rules:
 * The whole deck consists of 52 card. Red Diamonds, Clubs as well as black Heart and Spades. 
 * Aces have the lowest value equal to 1. 
 * Jacks, Queens and Kings have a value of 11.
-*You can play it in your browser [here](https://szymonrucinski.github.io/flipdatcard/)!
+* You can play it in your browser [here](https://szymonrucinski.github.io/flipdatcard/)!
 
 <p>
 <p align="center">
