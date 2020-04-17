@@ -9,7 +9,7 @@ Rules:
 
 <p>
 <p align="center">
-<img src="readme_assets/flipdatcard.gif" width="300"/>
+<img src="readme_assets/flipdatcard.gif" width="500"/>
 </p>
 </p>
 
