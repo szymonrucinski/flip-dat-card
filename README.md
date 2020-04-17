@@ -1,10 +1,11 @@
 # FlipDatCard ~ The Game
 
 This project is a card game written in TypeScript and React framework. The rules are simple user has to make a guess wherever the next card is greater or lower than the next one. The whole deck consists of 52 card. Red Diamonds, Clubs as well as black Heart and Spades. Aces have the lowest value equal to 1. Jacks, Queens and Kings have a value of 11.
-
+<div>
 <p align="center">
 <img src="readme_assets/flipdatcard.gif" width="300"/>
 </p>
+</div>
 
 ## Getting Started
 
@@ -31,12 +32,14 @@ $ npm run build
 You can test game using 
 ## Built With
 
-* [WebPack]
+* WebPack
+* React
+* TypeScript
 
 ## Authors
 
 * **Szymon Ruciński** - *Whole work* - [Szymon Ruciński](https://github.com/szymonrucinski)
-[My website](https://szymonrucinski.pl)
+* [My website](https://szymonrucinski.pl)
 
 
 ## License
