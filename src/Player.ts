@@ -1,10 +1,11 @@
-import {CardGenerator} from './CardGenerator';
+import {CardGenerator} from './CardGenerator'
 import {Card} from './Card'
+import {autorun, observable} from 'mobx'
 
-export class Player
+ export class Player
 {
-  score: number;
-  deck: Card[];
+  @observable score: number;
+  @observable deck: Card[];
 
   constructor()
   {
@@ -28,21 +29,19 @@ nextCardGreater(cardToCheck:Card, statement:boolean)
     else if(this.deck[size-1].value < cardToCheck.value && statement==false)
         this.score++; 
 
-    console.log('current'+this.deck[size-1].value);
-    // console.log('previous'+cardToCheck.value);
-    console.log('incoming'+this.deck[size-3].value)
+    // console.log('current'+this.deck[size-1].value);
+    // // console.log('previous'+cardToCheck.value);
+    // console.log('incoming'+this.deck[size-3].value)
 
+    autorun(()=>{
+        console.log(this.deck);
+    })
     
     
 }
 
-pop()
-{
-
 }
 
 
 
-
-}
 

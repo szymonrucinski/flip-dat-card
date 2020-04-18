@@ -1,6 +1,6 @@
 import React, { useState,useLayoutEffect,useEffect } from 'react';
 import ReactDOM, { render } from 'react-dom';
-import { Player } from './Player';
+import {Player} from './Player';
 import styledComponents from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
 import UIfx from 'UIfx';
