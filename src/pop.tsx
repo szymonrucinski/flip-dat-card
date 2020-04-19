@@ -68,7 +68,7 @@ export const Pop = observer((): JSX.Element => {
       <span>
         <DisplayScore>{plr.score}</DisplayScore>
         </span>
-        <CardFlip cardImg={currentCard.getImg()} flipper={currentCard.getImg()}>
+        <CardFlip cardImg={currentCard.getImg()} flipper={currentCard.getBackImg()}>
         </CardFlip>
         <ButtonWrapper>
         <ActionButtons onClick={(e) => {

@@ -20,8 +20,8 @@ export class CardGenerator
 
         for (suiteCounter = 0; suiteCounter <= Suite.length-1; suiteCounter++) 
         {
-            if(Suite[suiteCounter]=='hearts' || Suite[suiteCounter]=='diamonds') color ="Red"
-            else color = "Black"
+            if(Suite[suiteCounter]=='hearts' || Suite[suiteCounter]=='diamonds') color ="red"
+            else color = "black"
 
             for(rankCounter =0; rankCounter <=Rank.length-1; rankCounter++)
             {
@@ -50,10 +50,11 @@ export class CardGenerator
         
     }
 
-    for(var index in deck) 
-    {  
-        console.log(index+deck[index].id());  
-    } 
+    //follow the cards
+    // for(var index in deck) 
+    // {  
+    //     console.log(index+deck[index].id());  
+    // } 
 
     return deck;
     

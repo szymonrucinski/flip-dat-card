@@ -22,5 +22,11 @@ export class Card
         return './images/'+this.rank+'_of_'+this.suite+'.png';
     }
 
+    getBackImg() : string
+
+    {
+        return './images/'+'card_back_'+this.color+'.png';
+    }
+
 
 } 
