@@ -1,15 +1,9 @@
 import React, { useState,useLayoutEffect,useEffect } from 'react';
-import ReactDOM, { render } from 'react-dom';
 import player from './Player';
 import styledComponents from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
-import UIfx from 'UIfx';
-import ReactCardFlip from 'react-card-flip'
 import {CardFlip} from './CardFlip'
 import {observer} from 'mobx-react'
-import { useObserver } from "mobx-react";
-import { observerBatching } from "mobx-react-lite"
-observerBatching(Pop)
 
 const BackgroundLayer = createGlobalStyle`
 @font-face {
