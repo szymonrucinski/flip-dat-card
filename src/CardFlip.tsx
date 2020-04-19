@@ -5,7 +5,7 @@ import styledComponents from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
 import ReactCardFlip from 'react-card-flip'
 
-const CardStyle = styledComponents.img`-i
+const CardStyle = styledComponents.img`
   display: block;
   margin-left: auto;
   margin-right: auto;

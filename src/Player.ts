@@ -1,6 +1,6 @@
 import {CardGenerator} from './CardGenerator'
 import {Card} from './Card'
-import {autorun, observable} from 'mobx'
+import {autorun, observable, computed,action} from 'mobx'
 
  export class Player
 {
@@ -14,34 +14,38 @@ import {autorun, observable} from 'mobx'
       this.deck = cg.shuffle();
   }
  
-addPoint(){
-     this.score++ ;
-}
 
 
-nextCardGreater(cardToCheck:Card, statement:boolean)
+
+@action nextCardGreater(cardToCheck:Card, statement:boolean)
 {
     let size =this.deck.length;
 
-    if(this.deck[size-1].value > cardToCheck.value && statement){
+    if(this.deck[size-2].value > cardToCheck.value && statement){
         this.score++;}
     
-    else if(this.deck[size-1].value < cardToCheck.value && statement==false)
+    else if(this.deck[size-2].value < cardToCheck.value && statement==false)
         this.score++; 
 
-    // console.log('current'+this.deck[size-1].value);
-    // // console.log('previous'+cardToCheck.value);
-    // console.log('incoming'+this.deck[size-3].value)
-
-    autorun(()=>{
-        console.log(this.deck);
-    })
+  
     
     
 }
 
+@action getCardFromDeck()
+{
+   return this.deck.pop();
 }
 
 
 
+}
 
+
+const player = new Player();
+
+autorun(()=>{
+    console.log(player.deck[player.deck.length-1]);
+})
+
+export default player;
