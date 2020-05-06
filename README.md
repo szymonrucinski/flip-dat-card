@@ -27,18 +27,24 @@ Simply copy these commands in order to clone repository.
 ```
 $ git clone https://github.com/szymonrucinski/flipdatcard.git
 ```
-Run the following command to compile ts and tsx files into index.js
+Run the following command to compile project files and open Web App on port 8080 in your browser
 ```
-$ npm run build
+$ npm start
 ```
 
 
 ## Deployment
 
-You can test game using 
+You can also build project files using:
+
+```
+$ npm run buildw
+```
+
 ## Built With
 
 * WebPack
+* Mobx
 * React
 * TypeScript
 
