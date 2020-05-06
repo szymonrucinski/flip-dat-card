@@ -27,7 +27,7 @@ Simply copy these commands in order to clone repository.
 ```
 $ git clone https://github.com/szymonrucinski/flipdatcard.git
 ```
-Run the following command to compile project files and open Web App on port 8080 in your browser
+Run the following command to compile project files and open Web App on port:8080 in your browser
 ```
 $ npm start
 ```
