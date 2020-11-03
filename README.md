@@ -5,7 +5,7 @@ Rules:
 * The whole deck consists of 52 card. Red Diamonds, Clubs as well as black Heart and Spades. 
 * Aces have the lowest value equal to 1. 
 * Jacks, Queens and Kings have a value of 11.
-* You can play it in your browser [here](https://szymonrucinski.github.io/FlipDatCard/)!
+* You can play it in your browser [here](https://szymonrucinski.github.io/flip-dat-card/)!
 
 <p>
 <p align="center">
@@ -25,7 +25,7 @@ This is my first React + TS web application.
 Simply copy these commands in order to clone repository.
 
 ```
-$ git clone https://github.com/szymonrucinski/flipdatcard.git
+$ git clone https://github.com/szymonrucinski/flip-dat-card.git
 ```
 Run the following command to compile project files and open Web App on port:8080 in your browser
 ```
