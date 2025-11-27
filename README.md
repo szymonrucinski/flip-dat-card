@@ -49,6 +49,26 @@ npm run build
 
 The built files will be in the `dist/` directory.
 
+### Deploy to GitHub Pages
+
+This project is configured for GitHub Pages deployment:
+
+```bash
+# Build the project
+npm run build
+
+# Copy built files to root for GitHub Pages
+cp dist/bundle.js script.js
+cp dist/index.html index.html
+
+# Commit and push
+git add .
+git commit -m "Deploy to GitHub Pages"
+git push
+```
+
+Make sure GitHub Pages is enabled in your repository settings and set to serve from the root directory of your branch.
+
 ## 🛠️ Tech Stack
 
 - **React 18** - UI library
@@ -99,6 +119,7 @@ This version includes several modern design improvements:
 - ✅ Improved responsive layout
 - ✅ Added proper build tooling
 - ✅ Enhanced component structure
+- ✅ Configured for GitHub Pages deployment with proper asset paths
 
 ## 📝 License
 
