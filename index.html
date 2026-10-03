@@ -1,1 +1,92 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Flip Dat Card - A modern card flipping higher/lower game"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><title>Flip Dat Card - Higher or Lower Game</title></head><body><div id="root"></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Flip Dat Card 3D - a cel-shaded higher/lower card game">
+  <title>Flip Dat Card 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink: #140c0a; --paper: #fff4d6; }
+    * { box-sizing: border-box; margin: 0; }
+    html, body { height: 100%; overflow: hidden; background: #1a0f0b; font-family: 'Bangers', Impact, sans-serif; color: #fff; user-select: none; -webkit-tap-highlight-color: transparent; }
+    canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: manipulation; }
+    .stroke { -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; }
+
+    .hud { position: fixed; inset: 0; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between;
+           padding: max(14px, env(safe-area-inset-top)) clamp(12px, 3vw, 28px) max(18px, env(safe-area-inset-bottom)); }
+    .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .logo { font-size: clamp(34px, 6vw, 68px); line-height: .85; color: #ffd23f; text-shadow: 5px 5px 0 var(--ink); transform: rotate(-4deg); letter-spacing: 2px; }
+    .logo span { color: #ff7b1c; font-size: .6em; display: block; margin-left: 1.2em; }
+    .stats { display: flex; gap: 10px; }
+    .stat { background: var(--paper); color: var(--ink); border: 4px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); padding: 4px 14px 2px; transform: skew(-8deg); text-align: center; min-width: 76px; }
+    .stat small { display: block; font-size: 15px; letter-spacing: 2px; }
+    .stat b { display: block; font-size: clamp(28px, 4vw, 42px); font-weight: normal; line-height: 1; }
+    .stat.bump b { animation: bump .35s ease-out; }
+    @keyframes bump { 40% { transform: scale(1.45); color: #ff7b1c; } }
+
+    .controls { display: flex; justify-content: center; gap: clamp(12px, 3vw, 28px); pointer-events: auto; }
+    button { font: inherit; font-size: clamp(24px, 3.4vw, 36px); letter-spacing: 2px; color: #fff; -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill;
+             padding: 10px clamp(18px, 4vw, 42px) 6px; border: 4px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); transform: skew(-8deg);
+             cursor: pointer; transition: transform .08s, box-shadow .08s, filter .2s; }
+    button:hover:not(:disabled) { transform: skew(-8deg) translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+    button:active:not(:disabled) { transform: skew(-8deg) translate(4px, 4px); box-shadow: 2px 2px 0 var(--ink); }
+    button:disabled { filter: grayscale(.6) brightness(.75); cursor: default; }
+    #higher { background: #ff7b1c; }
+    #lower { background: #13b6c9; }
+    #restart { background: #ffd23f; }
+
+    #popup { position: fixed; left: 50%; top: 27%; font-size: clamp(60px, 12vw, 140px); text-shadow: 7px 7px 0 var(--ink); -webkit-text-stroke: 5px var(--ink);
+             pointer-events: none; opacity: 0; white-space: nowrap; }
+    #popup.good { color: #ffd23f; animation: pop 1.1s ease-out; }
+    #popup.bad { color: #ff3b3b; animation: pop 1.1s ease-out; }
+    @keyframes pop {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(.2) rotate(-14deg); }
+      14% { opacity: 1; transform: translate(-50%, -50%) scale(1.2) rotate(-6deg); }
+      28% { transform: translate(-50%, -50%) scale(1) rotate(-6deg); }
+      75% { opacity: 1; transform: translate(-50%, -62%) scale(1) rotate(-6deg); }
+      100% { opacity: 0; transform: translate(-50%, -80%) scale(.9) rotate(-6deg); }
+    }
+
+    .overlay { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(20, 12, 10, .55); pointer-events: auto; }
+    .overlay[hidden] { display: none; }
+    .panel { background: var(--paper); color: var(--ink); border: 6px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); padding: 26px 40px 32px; text-align: center; transform: rotate(-2deg); max-width: 92vw; }
+    .panel h2 { font-size: clamp(56px, 11vw, 100px); font-weight: normal; line-height: 1; color: #ff3b3b; text-shadow: 6px 6px 0 var(--ink); -webkit-text-stroke: 4px var(--ink); }
+    .panel p { font-size: clamp(24px, 4vw, 34px); margin: 8px 0 22px; letter-spacing: 1px; }
+    #loading .panel h2 { color: #ffd23f; font-size: clamp(40px, 8vw, 72px); }
+  </style>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <div class="hud">
+    <div class="top">
+      <h1 class="logo stroke">Flip Dat Card <span>3D edition</span></h1>
+      <div class="stats">
+        <div class="stat" id="scoreBox"><small>Score</small><b id="score">0</b></div>
+        <div class="stat"><small>Deck</small><b id="deck">52</b></div>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="higher" aria-label="Next card is higher" title="Arrow Up / H">&#9650; Higher</button>
+      <button id="lower" aria-label="Next card is lower" title="Arrow Down / L">&#9660; Lower</button>
+    </div>
+  </div>
+
+  <div id="popup" class="stroke" role="status" aria-live="polite"></div>
+
+  <div class="overlay" id="gameover" hidden>
+    <div class="panel">
+      <h2>Game Over</h2>
+      <p id="final"></p>
+      <button id="restart">Play Again</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="loading">
+    <div class="panel"><h2>Shuffling...</h2></div>
+  </div>
+</body>
+</html>

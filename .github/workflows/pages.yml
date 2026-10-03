@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [web]
+    branches: [web, 3d]
 
 permissions:
   contents: read
@@ -20,15 +20,27 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # 2D game (branch web) at the site root, 3D game (branch 3d) at /3d/
       - uses: actions/checkout@v7
+        with:
+          ref: web
+          path: web
+      - uses: actions/checkout@v7
+        with:
+          ref: 3d
+          path: 3d
       - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run build
+          cache-dependency-path: '*/package-lock.json'
+      - run: npm ci && npm run build
+        working-directory: web
+      - run: npm ci && npm run build
+        working-directory: 3d
+      - run: cp -r 3d/dist web/dist/3d
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: dist
+          path: web/dist
       - id: deployment
         uses: actions/deploy-pages@v5

@@ -16,7 +16,9 @@ export class Card {
   }
 
   getImg(): string {
-    return `./images/${this.id()}.png`;
+    // face cards have illustrated variants (*2.png)
+    const art = ['jack', 'queen', 'king'].includes(this.rank) ? '2' : '';
+    return `./images/${this.id()}${art}.png`;
   }
 
   getBackImg(): string {
